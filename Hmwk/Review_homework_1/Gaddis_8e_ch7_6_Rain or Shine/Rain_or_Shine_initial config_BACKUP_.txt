@@ -1,0 +1,177 @@
+/*
+ * Author:     Gabriel Vasquez
+ * Date:       Sept 6, 2021
+ * Class:      CIS-17A-48593
+ * Assignment: Review Homework 1, ch7.6 pg 449
+ */
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+const int mnthSze = 3;
+const int mnthDay = 30;
+char isWther[mnthSze][mnthDay];
+
+int main(int argc, char** argv) {
+    string month[mnthSze] = {"June","July","August"}; 
+    int countROW, countCOL;
+    ifstream inFile;
+    
+    int numJunR, numJulR, numAugR, sumRainy;
+    numJunR = 0;
+    numJulR = 0;
+    numAugR = 0;
+        
+    int numJunC, numJulC, numAugC, sumCloud;
+    numJunC = 0;
+    numJulC = 0;
+    numAugC = 0;
+        
+    int numJunS, numJulS, numAugS, sumSunny;
+    numJunS = 0;
+    numJulS = 0;
+    numAugS = 0;
+    //Maybe create a function for extracting data from file to Array
+    inFile.open("RainOrShine.txt");
+    //extract data from txt file to an Array:
+    for(countROW=0; countROW<mnthSze; countROW++){
+        for(countCOL=0; countCOL<mnthDay; countCOL++){
+            inFile >> isWther[countROW][countCOL];
+        }
+    }
+    inFile.close();
+    
+    //Report for total rainy, cloudy, & sunny days of each month
+    for (countROW=0; countROW<mnthSze; countROW++){
+        if(countROW==0){
+            for(countCOL=0; countCOL<mnthDay; countCOL++){
+                if(isWther[countROW][countCOL]=='r'){
+                    numJunR++;
+                }
+            }
+            for(countCOL=0; countCOL<mnthDay; countCOL++){
+                if(isWther[countROW][countCOL]=='c'){
+                    numJunC++;
+                }
+            }
+            for(countCOL=0; countCOL<mnthDay; countCOL++){
+                if(isWther[countROW][countCOL]=='s'){
+                    numJunS++;
+                }
+            }
+            cout << "There were " << numJunR <<" number of days that were rainy in the month of "
+                    << month[countROW] << endl;
+            cout << "There were " << numJunC <<" number of days that were cloudy in the month of "
+                    << month[countROW] << endl;
+            cout << "There were " << numJunS <<" number of days that were sunny in the month of "
+                    << month[countROW] << endl;
+        }
+        if(countROW==1){
+            /*int numJunR = 0;
+            int numOfCs = 0;
+            int numOfSs = 0;*/
+            for(countCOL=0; countCOL<mnthDay; countCOL++){
+                if(isWther[countROW][countCOL]=='r'){
+                    numJulR++;
+                }
+            }
+            for(countCOL=0; countCOL<mnthDay; countCOL++){
+                if(isWther[countROW][countCOL]=='c'){
+                    numJulC++;
+                }
+            }
+            for(countCOL=0; countCOL<mnthDay; countCOL++){
+                if(isWther[countROW][countCOL]=='s'){
+                    numJulS++;
+                }
+            }
+            cout << "There were " << numJulR <<" number of days that were rainy in the month of "
+                    << month[countROW] << endl;
+            cout << "There were " << numJulC <<" number of days that were cloudy in the month of "
+                    << month[countROW] << endl;
+            cout << "There were " << numJulS <<" number of days that were sunny in the month of "
+                    << month[countROW] << endl;
+        }
+        if(countROW==2){
+            /*int numJunR = 0;
+            int numOfCs = 0;
+            int numOfSs = 0;*/
+            for(countCOL=0; countCOL<mnthDay; countCOL++){
+                if(isWther[countROW][countCOL]=='r'){
+                    numAugR++;
+                }
+            }
+            for(countCOL=0; countCOL<mnthDay; countCOL++){
+                if(isWther[countROW][countCOL]=='c'){
+                    numAugC++;
+                }
+            }
+            for(countCOL=0; countCOL<mnthDay; countCOL++){
+                if(isWther[countROW][countCOL]=='s'){
+                    numAugS++;
+                }
+            }
+            cout << "There were " << numAugR <<" number of days that were rainy in the month of "
+                    << month[countROW] << endl;
+            cout << "There were " << numAugC <<" number of days that were cloudy in the month of "
+                    << month[countROW] << endl;
+            cout << "There were " << numAugS <<" number of days that were sunny in the month of "
+                    << month[countROW] << endl;
+        }
+        cout <<endl;
+    }
+        
+    //Report for total rainy, cloudy, & sunny days of whole 3 months.
+    sumRainy = numJunR+numJulR+numAugR;
+    sumCloud = numJunC+numJulC+numAugC;
+    sumSunny = numJunS+numJulS+numAugS;
+        
+    cout <<"The total number of rainy days between June and August is " << sumRainy << endl;
+    cout <<"The total number of cloudy days between June and August is " << sumCloud << endl;
+    cout <<"The total number of sunny days between June and August is " << sumSunny << endl;
+    cout <<"==================================" << endl;
+    
+    //Report of which month had the most rainy days
+    if(numJunR > numJulR && numJunR > numAugR){
+        cout <<"June had the most rainy days. \n";
+    }
+    else if(numJulR > numJunR && numJulR > numAugR){
+        cout <<"July had the most rainy days.\n";
+    }
+    else if(numAugR > numJunR && numAugR > numJulR){
+        cout <<"August had the most rainy days.\n";
+    }
+    
+    //Report of which month had the most cloudy days
+    if(numJunC > numJulC && numJunC > numAugC){
+        cout <<"June had the most cloudy days. \n";
+    }
+    else if(numJulC > numJunC && numJulC > numAugC){
+        cout <<"July had the most cloudy days.\n";
+    }
+    else if(numAugC > numJunC && numAugC > numJulC){
+        cout <<"August had the most cloudy days.\n";
+    }
+    
+    //Report of which month had the most sunny days
+    if(numJunS > numJulS && numJunS > numAugS){
+        cout <<"June had the most sunny days. \n";
+    }
+    else if(numJulS > numJunS && numJulS > numAugS){
+        cout <<"July had the most sunny days.\n";
+    }
+    else if(numAugS > numJunS && numAugS > numJulS){
+        cout <<"August had the most sunny days.\n";
+    }
+
+    //Display the whole Array
+    for (countROW=0; countROW<mnthSze; countROW++){
+        for(countCOL=0; countCOL<mnthDay; countCOL++){
+            cout << isWther[countROW][countCOL];
+        }
+        cout <<endl;
+    }
+    
+    return 0;
+}
+
